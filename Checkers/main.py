@@ -1,33 +1,42 @@
-# Checkers Game
+# game main
 import pygame
-from checkers import board
-from checkers.constants import WIDTH, HEIGHT
-from checkers.board import Board
-FPS  = 60
+from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, RED
+from checkers.game import Game
+
+FPS = 60
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Checkers")
+pygame.display.set_caption('Checkers')
 
-# the game play
+def get_row_col_from_mouse(pos):
+    x, y = pos
+    row = y // SQUARE_SIZE
+    col = x // SQUARE_SIZE
+    return row, col
+
 def main():
     run = True
     clock = pygame.time.Clock()
-    board = Board()
+    game = Game(WIN)
 
     while run:
         clock.tick(FPS)
-        
+
+        if game.winner() != None:
+            print(game.winner())
+            run = False
+
         for event in pygame.event.get():
-            # to end the game from close in top bar
             if event.type == pygame.QUIT:
                 run = False
-            # event from mouse
+            
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
-        board.draw_squares(WIN)
-        pygame.display.update()
+                pos = pygame.mouse.get_pos()
+                row, col = get_row_col_from_mouse(pos)
+                game.select(row, col)
 
-    # exit from game
+        game.update()
+    
     pygame.quit()
 
 main()
