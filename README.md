@@ -20,3 +20,6 @@ Utility-based agents
 
 TO KNOW MORE ABOUT GAME.[^1].
 [^1]: https://en.wikipedia.org/wiki/Checkers
+
+Video.[^2].
+[^2]: https://youtu.be/ayImdr6_b5g
