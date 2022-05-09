@@ -1,4 +1,3 @@
-# Assets: https://techwithtim.net/wp-content/uploads/2020/09/assets.zip
 import pygame
 from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, RED, WHITE
 from checkers.game import Game
@@ -27,6 +26,7 @@ def main():
             value, new_board = minimax(game.get_board(), 4, WHITE, game)
             game.ai_move(new_board)
 
+        # when one win out of game
         if game.winner() != None:
             print(game.winner())
             run = False
@@ -39,7 +39,7 @@ def main():
                 pos = pygame.mouse.get_pos()
                 row, col = get_row_col_from_mouse(pos)
                 game.select(row, col)
-
+        # after any move update the game
         game.update()
     
     pygame.quit()

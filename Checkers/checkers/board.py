@@ -1,5 +1,5 @@
 import pygame
-from .constants import BLACK, ROWS, RED, SQUARE_SIZE, COLS, WHITE
+from .constants import BLACK, ROWS, RED, SQUARE_SIZE, COLS, WHITE, GREEN
 from .piece import Piece
 
 class Board:
@@ -8,13 +8,13 @@ class Board:
         self.red_left = self.white_left = 12
         self.red_kings = self.white_kings = 0
         self.create_board()
-    
+#  to drw the squers
     def draw_squares(self, win):
         win.fill(BLACK)
         for row in range(ROWS):
             for col in range(row % 2, COLS, 2):
-                pygame.draw.rect(win, RED, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-
+                pygame.draw.rect(win, GREEN, (row*SQUARE_SIZE, col *SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+# return some num the pos and neg to know  
     def evaluate(self):
         return self.white_left - self.red_left + (self.white_kings * 0.5 - self.red_kings * 0.5)
 
@@ -25,7 +25,7 @@ class Board:
                 if piece != 0 and piece.color == color:
                     pieces.append(piece)
         return pieces
-
+# move piece to row and col  
     def move(self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move(row, col)
@@ -36,10 +36,10 @@ class Board:
                 self.white_kings += 1
             else:
                 self.red_kings += 1 
-
+# get pice 
     def get_piece(self, row, col):
         return self.board[row][col]
-
+#redraw the board after move and draw every thing
     def create_board(self):
         for row in range(ROWS):
             self.board.append([])

@@ -1,7 +1,10 @@
+#that contain the rules of game and how we con move piece
+# and the trun of plyer , who win the game
 import pygame
 from .constants import RED, WHITE, BLUE, SQUARE_SIZE
 from checkers.board import Board
 
+# update the game and draw the new pos
 class Game:
     def __init__(self, win):
         self._init()
@@ -18,12 +21,15 @@ class Game:
         self.turn = RED
         self.valid_moves = {}
 
+# the winner
     def winner(self):
         return self.board.winner()
 
+# reset the game
     def reset(self):
         self._init()
 
+# elect the winner
     def select(self, row, col):
         if self.selected:
             result = self._move(row, col)
@@ -38,7 +44,7 @@ class Game:
             return True
             
         return False
-
+# how you caan move piece
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
         if self.selected and piece == 0 and (row, col) in self.valid_moves:
@@ -51,12 +57,12 @@ class Game:
             return False
 
         return True
-
+# drw the correct move that can plyer chose it
     def draw_valid_moves(self, moves):
         for move in moves:
             row, col = move
             pygame.draw.circle(self.win, BLUE, (col * SQUARE_SIZE + SQUARE_SIZE//2, row * SQUARE_SIZE + SQUARE_SIZE//2), 15)
-
+# change the turn from player to anther
     def change_turn(self):
         self.valid_moves = {}
         if self.turn == RED:
