@@ -18,6 +18,8 @@ Utility-based agents
 - Goal test: Win the game by made Opponent without pieces remaining, or who cannot move due to being blocked, loses the game.
 - Path cost: Each step costs 1, so the path cost is the number of steps in the path.
 
+### Maxmin Algorithm
+
 TO KNOW MORE ABOUT GAME.[^1].
 [^1]: https://en.wikipedia.org/wiki/Checkers
 
